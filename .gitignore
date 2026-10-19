@@ -1,0 +1,58 @@
+# ===== SEGURANÇA: nunca versionar amostras ou artefatos perigosos =====
+# Amostras de malware e arquivos executáveis
+*.exe
+*.dll
+*.scr
+*.bin
+*.elf
+*.msi
+*.ps1.malware
+amostras/
+samples/
+malware/
+
+# Arquivos compactados (amostras costumam vir em .zip com senha "infected")
+*.zip
+*.7z
+*.rar
+*.tar.gz
+
+# Documentos com macro
+*.docm
+*.xlsm
+
+# Capturas de rede e e-mails brutos (podem conter dados sensíveis e ficam enormes)
+*.pcap
+*.pcapng
+*.cap
+*.eml
+*.msg
+
+# Imagens de disco e memória
+*.iso
+*.qcow2
+*.vmdk
+*.vdi
+*.raw
+*.mem
+*.dmp
+
+# Segredos e credenciais
+.env
+*.key
+*.pem
+*.ovpn
+credenciais*
+secrets*
+
+# ===== Sistema e editores =====
+.DS_Store
+Thumbs.db
+*.swp
+*~
+.vscode/
+.idea/
+
+# Rascunhos pessoais
+rascunhos/
+*.tmp
