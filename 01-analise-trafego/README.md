@@ -1,12 +1,12 @@
 # Lab 01 — Análise de Tráfego
 
-|                      |                                        |
-| -------------------- | -------------------------------------- |
-| **Data**             | 20-10-2026                             |
-| **Categoria**        | Análise de tráfego / Redes / Wireshark |
-| **Ferramentas**      | Wireshark 4.7.4                        |
-| **Dificuldade**      | Fácil                                  |
-| **Fonte do cenário** | malware-traffic-analysis.net           |
+|                      |                                                                                                |
+| -------------------- | ---------------------------------------------------------------------------------------------- |
+| **Data**             | 20-10-2026                                                                                     |
+| **Categoria**        | Análise de tráfego / Redes / Wireshark                                                         |
+| **Ferramentas**      | Wireshark 4.7.4                                                                                |
+| **Dificuldade**      | Fácil                                                                                          |
+| **Fonte do cenário** | [malware-traffic-analysis.net](https://www.malware-traffic-analysis.net/2026/02/28/index.html) |
 
 ---
 
@@ -23,7 +23,7 @@ O relatório precisa responder: o IP do cliente Windows infectado, o MAC dele, o
 - Arquivo baixado: 2026-02-28-traffic-analysis-exercise.pcap.zip
 - Ferramentas e versões: Wireshark 4.7.4
 - Sistema: Omarchy / Arch Linux
-- c66a74231c90ccf8004e6dd0fbf2974174d5dd5f467f78d15f60ab54176bf891205acef792ab24ec053660dc05677a7351fe28ca600c49e742af70a66d5282ce - Hash do PCAP
+- **SHA-512 do PCAP:** c66a74231c90ccf8004e6dd0fbf2974174d5dd5f467f78d15f60ab54176bf891205acef792ab24ec053660dc05677a7351fe28ca600c49e742af70a66d5282ce 
 
 ## 4. Execução / Investigação
 
@@ -34,15 +34,15 @@ Após abrir o arquivo .pcap, fui ler o enunciado pra ver do que se tratava o pro
 
 1 - O ataque era um NetSupport Manager RAT que pesquisando, descobri que é: O **NetSupport Manager RAT** é o uso malicioso do **NetSupport Manager**, um software comercial legítimo de monitoramento e administração remota de computadores.
 
-Com os dados do enunciado, eu consigo montar um filtro e aplicar ele no Wireshark pra uma melhor análise:  tcp.port == 443 and ip.addr == 45.131.214[.]85.
+Com os dados do enunciado, eu consigo montar um filtro e aplicar ele no Wireshark pra uma melhor análise:  'tcp.port == 443 and ip.addr == 45.131.214[.]85'.
 
-2 - O host **10.2.28[.]88** iniciou conexões de saída para o servidor de C2 **45.131.214[.]85:443**, comportamento compatível com beaconing de RAT. Provavelmente a conexão foi iniciada pelo host interno, característica de uma conexão reversa
+2 - O host **10.2.28[.]88** iniciou conexões de saída para o servidor de C2 **45.131.214[.]85:443**, comportamento compatível com beaconing de RAT. Isso significa que a conexão foi iniciada pelo host interno, característica de uma conexão reversa.
 
 ![](imagens/q1-01.png)
 
 Numa rede corporativa, o firewall e o NAT bloqueiam quase toda conexão que **entra** vinda da internet. Se o atacante tentasse se conectar direto ao 10.2.28[.]88, nem conseguiria alcançar o IP, que é privado. Já conexões que **saem** para a porta 443 são liberadas, porque é por ali que todo mundo acessa sites HTTPS.
 
-3 - O ip do servidor C2 é **45.131.214[.]85** e o ip da máquina infectada é o **10.2.28[.]88**. Com isso, já mato a primeira questão, que era descobrir o ip da máquina infectada.
+3 - O ip do servidor C2 é **45.131.214[.]85** e o ip da máquina infectada é o **10.2.28[.]88**.
 
 
 ### 4.2 MAC
@@ -51,7 +51,7 @@ Para responder a segunda questão, eu preciso identificar o MAC dessa máquina i
 
 Utilizando o filtro 'arp' no Wireshark, consigo ver todas as requisições ARP realizadas nessa rede. Os campos ''...is at...'' vão me fornecer o MAC da máquina infectada. 
 
-No pacote 216 o ip 10.2.28[.]2 pergunta quem é o ip 10.2.28[.]88, e ele responde com 10.2.28[.]88 is at 00:19:d1:b2:4d:ad, logo, tenho a conclusão de que o MAC da máquina infectada é este, concluido o segundo desafio.
+No pacote 216 o ip 10.2.28[.]2 pergunta quem é o ip 10.2.28[.]88, e ele responde com 10.2.28[.]88 is at 00:19:d1:b2:4d:ad, reveleando o MAC.
 
 ![](imagens/q2-01.png)
 
@@ -60,7 +60,7 @@ No pacote 216 o ip 10.2.28[.]2 pergunta quem é o ip 10.2.28[.]88, e ele respond
 
 O próximo passo é descobrir o hostname. Utilizei o filtro 'dhcp' e acabei encontrando uma máquina tentando requisitar um ip na rede. No campo Client MAC adress, apareceu que tal máquina é nossa máquina infectada, e eu provei isso verificando o MAC descoberto anteriormente (00:19:d1:b2:4d:ad).
 
-Como o MAC bateu, fui verificar o campo Option: (12) Host Name e lá apareceu o hostname dessa máquina - DESKTOP-TEYQ2NR, concluindo assim o terceiro desafio.
+Como o MAC bateu, fui verificar o campo Option: (12) Host Name e lá apareceu o hostname dessa máquina - DESKTOP-TEYQ2NR.
 
 ![](imagens/q3-01.png)
 
@@ -73,7 +73,7 @@ O AS-REQ é o primeiro pedido de autenticação do login, e nele o nome da conta
 
 ![](imagens/q4-01.png)
 
-Para garantir que se tratava de uma conta de usuário, e não da conta da própria máquina, verifiquei três pontos: o nome não termina com `$` (padrão das contas de computador no AD), o `name-type` é KRB5-NT-PRINCIPAL e o `realm` é EASYAS123, o mesmo domínio informado no cenário. Além disso, o serviço solicitado (`sname`) é o `krbtgt`, o que indica que esse pacote corresponde ao próprio login do usuário no domínio, concluindo assim o quarto desafio.
+Para garantir que se tratava de uma conta de usuário, e não da conta da própria máquina, verifiquei três pontos: o nome não termina com `$` (padrão das contas de computador no AD), o `name-type` é KRB5-NT-PRINCIPAL e o `realm` é EASYAS123, o mesmo domínio informado no cenário. Além disso, o serviço solicitado (`sname`) é o `krbtgt`, o que indica que esse pacote corresponde ao próprio login do usuário no domínio.
 
 
 ### 4.5 Nome completo
@@ -82,7 +82,7 @@ O próximo passo é descobrir o nome completo do usuário. Inicialmente, tentei 
 
 Diante disso, verifiquei em **Statistics → Protocol Hierarchy** quais outros protocolos estavam presentes na captura e identifiquei o **SAMR** (Security Account Manager Remote), encapsulado em SMB2/DCE-RPC, que o Windows utiliza para consultar dados de contas diretamente no controlador de domínio. Utilizei o filtro `samr` e encontrei uma sequência de chamadas feitas pela máquina infectada (pacotes 324 a 353), em que ela localiza a conta `brolf` (`LookupNames`), abre a conta (`OpenUser`) e solicita seus dados (`QueryUserInfo`).
 
-Na resposta do controlador de domínio a essa solicitação (pacote nº 339, `QueryUserInfo response`), o campo `Account Name` confirma a conta **brolf**, e o campo `Full Name`, logo abaixo, traz o nome completo do usuário: **Becka Rolf**, concluindo assim o quinto desafio.
+Na resposta do controlador de domínio a essa solicitação (pacote nº 339, `QueryUserInfo response`), o campo `Account Name` confirma a conta **brolf**, e o campo `Full Name`, logo abaixo, traz o nome completo do usuário: **Becka Rolf**.
 
 ![](imagens/q5-01.png)
 
@@ -90,13 +90,11 @@ Na resposta do controlador de domínio a essa solicitação (pacote nº 339, `Qu
 
 ## 5. Linha do tempo (UTC)
 
-| Horário | Pacote | Evento |
-|---|---|---|
-| 2026-02-28 19:55:06 | 1 | Início da captura; host envia DHCP Discover |
-| 2026-02-28 19:55:23 | 243 | Login da conta brolf no domínio (Kerberos AS-REQ) |
-| ____ | ____ | Primeira conexão com o C2 45.131.214[.]85:443 |
-| ____ | — | Beaconing a cada ~__ segundos (__ requisições no total) |
-| ____ | ____ | Fim da captura |
+| Horário             | Pacote | Evento                                            |
+| ------------------- | ------ | ------------------------------------------------- |
+| 2026-02-28 19:55:06 | 1      | Início da captura; host envia DHCP Discover       |
+| 2026-02-28 19:55:23 | 243    | Login da conta brolf no domínio (Kerberos AS-REQ) |
+| 2026-02-28-19:55:51 | 2569   | Primeira conexão com o C2 45.131.214[.]85:443     |
 
 ## 6. Indicadores de comprometimento (IOCs)
 

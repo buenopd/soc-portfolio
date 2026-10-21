@@ -12,7 +12,7 @@ Este repositório reúne laboratórios práticos que desenvolvi para aplicar o q
 
 | #   | Lab                                                      | Ferramentas                                | Status       |
 | --- | -------------------------------------------------------- | ------------------------------------------ | ------------ |
-| 01  | [Análise de tráfego de rede](./01-analise-trafego/)      | Wireshark                                  | ✅            |
+| 01  | [Análise de tráfego de rede](./01-analise-trafego/)      | Wireshark                                  | ✅ Concluído  |
 | 02  | [Análise de e-mail de phishing](./02-analise-phishing/)  | Análise de cabeçalhos, VirusTotal, URLScan | 🔲 Planejado |
 | 03  | [Home lab de SOC com Wazuh](./03-homelab-wazuh/)         | Wazuh, Sysmon, Atomic Red Team, KVM        | 🔲 Planejado |
 | 04  | [Regras de detecção customizadas](./04-regras-deteccao/) | Wazuh rules, MITRE ATT&CK                  | 🔲 Planejado |
