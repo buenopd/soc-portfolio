@@ -5,7 +5,7 @@
 | **Data**             | 20-10-2026                             |
 | **Categoria**        | Análise de tráfego / Redes / Wireshark |
 | **Ferramentas**      | Wireshark                              |
-| **Dificuldade**      | Média                                  |
+| **Dificuldade**      | Fácil                                  |
 | **Fonte do cenário** | malware-traffic-analysis.net           |
 
 ---
