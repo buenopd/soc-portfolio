@@ -1,8 +1,7 @@
 # Lab 01 — Análise de Tráfego
 
-|                      |                                                                                                |
-| -------------------- | ---------------------------------------------------------------------------------------------- |
 | **Data**             | 20-10-2026                                                                                     |
+| -------------------- | ---------------------------------------------------------------------------------------------- |
 | **Categoria**        | Análise de tráfego / Redes / Wireshark                                                         |
 | **Ferramentas**      | Wireshark 4.7.4                                                                                |
 | **Dificuldade**      | Fácil                                                                                          |
@@ -34,7 +33,7 @@ Após abrir o arquivo .pcap, fui ler o enunciado pra ver do que se tratava o pro
 
 1 - O ataque era um NetSupport Manager RAT que pesquisando, descobri que é: O **NetSupport Manager RAT** é o uso malicioso do **NetSupport Manager**, um software comercial legítimo de monitoramento e administração remota de computadores.
 
-Com os dados do enunciado, eu consigo montar um filtro e aplicar ele no Wireshark pra uma melhor análise:  'tcp.port == 443 and ip.addr == 45.131.214[.]85'.
+Com os dados do enunciado, eu consigo montar um filtro e aplicar ele no Wireshark pra uma melhor análise:  `tcp.port == 443 and ip.addr == 45.131.214.85`
 
 2 - O host **10.2.28[.]88** iniciou conexões de saída para o servidor de C2 **45.131.214[.]85:443**, comportamento compatível com beaconing de RAT. Isso significa que a conexão foi iniciada pelo host interno, característica de uma conexão reversa.
 
@@ -47,7 +46,7 @@ Numa rede corporativa, o firewall e o NAT bloqueiam quase toda conexão que **en
 
 ### 4.2 MAC
 
-Para responder a segunda questão, eu preciso identificar o MAC dessa máquina infectada, o que não é muito difícil a partir do momento que descobri o IP dessa máquina.
+Para responder a segunda questão, eu preciso identificar o MAC dessa máquina infectada.
 
 Utilizando o filtro 'arp' no Wireshark, consigo ver todas as requisições ARP realizadas nessa rede. Os campos ''...is at...'' vão me fornecer o MAC da máquina infectada. 
 
