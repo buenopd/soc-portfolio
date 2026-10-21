@@ -1,6 +1,6 @@
 # 🛡️ SOC Portfolio — Blue Team Labs
 
-Olá! Sou **[Pedro Bueno de Carvalho]**, estudante do curso técnico em Cibersegurança na FIAP, com foco em **operações de segurança (SOC)**, detecção e resposta a incidentes.
+Olá! Me chamo **Pedro Bueno de Carvalho**, estudante do curso técnico em Cibersegurança na FIAP, com foco em **operações de segurança (SOC)**, detecção e resposta a incidentes.
 
 Este repositório reúne laboratórios práticos que desenvolvi para aplicar o que estudo: análise de tráfego, triagem de phishing, monitoramento com SIEM, criação de regras de detecção e análise básica de malware. Cada lab é documentado no formato de um relatório técnico, com evidências e mapeamento no **MITRE ATT&CK**.
 
@@ -10,13 +10,13 @@ Este repositório reúne laboratórios práticos que desenvolvi para aplicar o q
 
 ## 📂 Laboratórios
 
-| # | Lab | Ferramentas | Status |
-|---|-----|-------------|--------|
-| 01 | [Análise de tráfego de rede](./01-analise-trafego/) | Wireshark | 🔲 Planejado |
-| 02 | [Análise de e-mail de phishing](./02-analise-phishing/) | Análise de cabeçalhos, VirusTotal, URLScan | 🔲 Planejado |
-| 03 | [Home lab de SOC com Wazuh](./03-homelab-wazuh/) | Wazuh, Sysmon, Atomic Red Team, KVM | 🔲 Planejado |
-| 04 | [Regras de detecção customizadas](./04-regras-deteccao/) | Wazuh rules, MITRE ATT&CK | 🔲 Planejado |
-| 05 | [Triagem estática de malware](./05-triagem-malware/) | strings, PE analysis, VirusTotal | 🔲 Planejado |
+| #   | Lab                                                      | Ferramentas                                | Status       |
+| --- | -------------------------------------------------------- | ------------------------------------------ | ------------ |
+| 01  | [Análise de tráfego de rede](./01-analise-trafego/)      | Wireshark                                  | ✅            |
+| 02  | [Análise de e-mail de phishing](./02-analise-phishing/)  | Análise de cabeçalhos, VirusTotal, URLScan | 🔲 Planejado |
+| 03  | [Home lab de SOC com Wazuh](./03-homelab-wazuh/)         | Wazuh, Sysmon, Atomic Red Team, KVM        | 🔲 Planejado |
+| 04  | [Regras de detecção customizadas](./04-regras-deteccao/) | Wazuh rules, MITRE ATT&CK                  | 🔲 Planejado |
+| 05  | [Triagem estática de malware](./05-triagem-malware/)     | strings, PE analysis, VirusTotal           | 🔲 Planejado |
 
 > Legenda: 🔲 Planejado · 🟡 Em andamento · ✅ Concluído
 
