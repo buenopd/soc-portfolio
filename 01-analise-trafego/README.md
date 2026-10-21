@@ -31,9 +31,6 @@ O relatório precisa responder: o IP do cliente Windows infectado, o MAC dele, o
 
 Após abrir o arquivo .pcap, fui ler o enunciado pra ver do que se tratava o problema e identifiquei três pontos principais.
 
-![](../Pasted%20image%2020261020222316.png)
-
-
 1 - O ataque era um NetSupport Manager RAT que pesquisando, descobri que é: O **NetSupport Manager RAT** é o uso malicioso do **NetSupport Manager**, um software comercial legítimo de monitoramento e administração remota de computadores.
 
 Com os dados do enunciado, eu consigo montar um filtro e aplicar ele no Wireshark pra uma melhor análise:  tcp.port == 443 and ip.addr == 45.131.214.85.
