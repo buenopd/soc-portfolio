@@ -1,11 +1,11 @@
 # Lab XX — [Título do lab]
 
-| | |
-|---|---|
-| **Data** | AAAA-MM-DD |
-| **Categoria** | Análise de tráfego / Phishing / SIEM / Detecção / Malware |
-| **Ferramentas** | ... |
-| **Dificuldade** | Fácil / Média / Difícil |
+|                      |                                                              |
+| -------------------- | ------------------------------------------------------------ |
+| **Data**             | AAAA-MM-DD                                                   |
+| **Categoria**        | Análise de tráfego / Phishing / SIEM / Detecção / Malware    |
+| **Ferramentas**      | ...                                                          |
+| **Dificuldade**      | Fácil / Média / Difícil                                      |
 | **Fonte do cenário** | (ex.: malware-traffic-analysis.net, exercício de AAAA-MM-DD) |
 
 ---
